@@ -15,6 +15,79 @@
         display: none;
     }
 
+    .mobile-navigation.unactive {
+        display: none;
+    }
+
+    .dropdown-navigation {
+        display: none;
+    }
+
+    .dropdown-navigation.active {
+        display: block;
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        z-index: 2;
+        background-color: $blue;
+        padding: 1rem 10rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        opacity: 0.9;
+
+        .navigation-list {
+            width: 100%;
+            text-align: center;
+
+            .first-list-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .logo-dropdown {
+                    fill: $white;
+                }
+
+                .close-dropdown-menu {
+                    width: 20px;
+                }
+            }
+
+            .list-item {
+                width: 100%;
+                padding: 20px 0;
+                color: $white;
+                border-bottom: 1px solid $grayishBlue;
+                cursor: pointer;
+            }
+
+            .last-list-item {
+                margin-top: 20px;
+                border: 2px solid $white;
+                border-radius: 10px;
+
+                .btn-login {
+                    color: white;
+                    font-weight: $bolder;
+                }
+            }
+        }
+
+        .list-social-media {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .list-item {
+                margin-right: 40px;
+                cursor: pointer;
+            }
+        }
+    }
+
     .navigation {
         grid-area: navigation;
         position: fixed;
@@ -283,6 +356,12 @@
                 .btn-add-and-install {
                     background-color: $softBlue;
                 }
+
+                .btn-add-and-install:hover {
+                    color: $softBlue;
+                    border: 1px solid $softBlue;
+                    background-color: $white;
+                }
             }
 
             .card-two {
@@ -313,17 +392,48 @@
             .list-item {
                 width: 100%;
                 border-top: 1px solid $grayishBlue;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 1rem 0;
+                padding: 1rem;
                 font-size: $small;
                 color: $darkBlue;
+                cursor: pointer;
 
-                .ico-arrow {
-                    width: 15px;
-                    height: 10px;
-                    margin-right: 1rem;
+                div {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .ico-arrow {
+                        width: 10px;
+                        height: 10px;
+                    }
+                }
+
+                div:hover {
+                    color: $softRed;
+                }
+
+                .answer {
+                    color: $grayishBlue;
+                    display: none;
+                    margin-top: 2rem;
+                }
+            }
+
+            .list-item.active {
+
+                div {
+                    
+                    .svg {
+                        transform: rotate(180deg);
+                        
+                        .ico-arrow {
+                            stroke: $softRed;
+                        }
+                    }
+                }
+
+                .answer {
+                    display: block;
                 }
             }
 
@@ -352,29 +462,67 @@
             text-align: center;
         }
 
-        .input-container {
+        .contact-us-email {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
 
-            .input-email {
-                width: 250px;
-                padding: 10px;
+            .input-container {
+
+                .input-email {
+                    width: 300px;
+                    padding: 10px;
+                    display: block;
+                }
+    
+                .input-email::placeholder {
+                    color: $grayishBlue;
+                    font-size: $small;
+                }
+
+                .error-message {
+                    font-size: $small;
+                    color: $white;
+                    margin-left: 10px;
+                    display: none;
+                }
+
+                .img-error {
+                    position: absolute;
+                    top: 12px;
+                    right: 15px;
+                    width: 20px;
+                    height: 20px;
+                    display: none;
+                }
             }
 
-            .input-email::placeholder {
-                color: $grayishBlue;
-                font-size: $small;
+            .input-container.error {
+                background-color: $softRed;
+                padding: 2px 2px 8px 2px;
+                border-radius: 5px;
+                position: relative;
+
+                .error-message {
+                    display: block;
+                }
+
+                .img-error {
+                    display: block;
+                }
             }
-        }
 
-        .btn-contact-us {
-            background-color: $softRed;
-            margin-left: 2rem;
-            border: 1px solid transparent;
-        }
-
-        .btn-contact-us:hover {
-            border: 1px solid $softRed;
-            color: $softRed;
-            background-color: $white;
+            .btn-contact-us {
+                background-color: $softRed;
+                margin-left: 2rem;
+                border: 1px solid transparent;
+            }
+    
+            .btn-contact-us:hover {
+                border: 1px solid $softRed;
+                color: $softRed;
+                background-color: $white;
+            }
         }
     }
 }
@@ -734,8 +882,6 @@
              "footer"
         ;
 
-
-
         .page-content {
 
             .section {
@@ -880,18 +1026,21 @@
             .section-five {
                 padding: 3rem 10rem;
 
-                .input-container {
+                .contact-us-email {
+                    flex-direction: column;
                     width: 80%;
 
-                    .input-email {
-                        display: block;
+                    .input-container {
                         width: 100%;
-                        margin-bottom: 3rem;
+                        
+                        .input-email {
+                            width: 100%;
+                        }
                     }
 
                     .btn-contact-us {
                         width: 100%;
-                        margin: 0;
+                        margin: 3rem 0 0 0;
                     }
                 }
             }
@@ -928,6 +1077,10 @@
     }
 
         .grid-layout {
+
+            .dropdown-navigation.active {
+                padding: 1rem 5rem;
+            }
 
             .mobile-navigation {
                 padding: 0 5rem;
@@ -993,6 +1146,19 @@
 
         .mobile-navigation {
             padding: 0 2rem;
+        }
+
+        .dropdown-navigation.active {
+            padding: 1rem 2rem;
+            align-items: center;
+
+            .navigation-list {
+                width: 90%;
+            }
+
+            .list-social-media {
+                width: 90%;
+            }
         }
 
         .page-content {

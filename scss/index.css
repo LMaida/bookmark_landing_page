@@ -68,6 +68,67 @@ input {
 .grid-layout .mobile-navigation {
   display: none;
 }
+.grid-layout .mobile-navigation.unactive {
+  display: none;
+}
+.grid-layout .dropdown-navigation {
+  display: none;
+}
+.grid-layout .dropdown-navigation.active {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  background-color: rgb(60, 74, 146);
+  padding: 1rem 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0.9;
+}
+.grid-layout .dropdown-navigation.active .navigation-list {
+  width: 100%;
+  text-align: center;
+}
+.grid-layout .dropdown-navigation.active .navigation-list .first-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.grid-layout .dropdown-navigation.active .navigation-list .first-list-item .logo-dropdown {
+  fill: hsl(0, 0%, 100%);
+}
+.grid-layout .dropdown-navigation.active .navigation-list .first-list-item .close-dropdown-menu {
+  width: 20px;
+}
+.grid-layout .dropdown-navigation.active .navigation-list .list-item {
+  width: 100%;
+  padding: 20px 0;
+  color: hsl(0, 0%, 100%);
+  border-bottom: 1px solid hsl(229, 8%, 60%);
+  cursor: pointer;
+}
+.grid-layout .dropdown-navigation.active .navigation-list .last-list-item {
+  margin-top: 20px;
+  border: 2px solid hsl(0, 0%, 100%);
+  border-radius: 10px;
+}
+.grid-layout .dropdown-navigation.active .navigation-list .last-list-item .btn-login {
+  color: white;
+  font-weight: 600;
+}
+.grid-layout .dropdown-navigation.active .list-social-media {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.grid-layout .dropdown-navigation.active .list-social-media .list-item {
+  margin-right: 40px;
+  cursor: pointer;
+}
 .grid-layout .navigation {
   grid-area: navigation;
   position: fixed;
@@ -292,6 +353,11 @@ input {
 .grid-layout .page-content .section-three .cards-container .card .btn-add-and-install {
   background-color: hsl(231, 69%, 60%);
 }
+.grid-layout .page-content .section-three .cards-container .card .btn-add-and-install:hover {
+  color: hsl(231, 69%, 60%);
+  border: 1px solid hsl(231, 69%, 60%);
+  background-color: hsl(0, 0%, 100%);
+}
 .grid-layout .page-content .section-three .cards-container .card-two {
   margin-top: 30px;
 }
@@ -315,17 +381,36 @@ input {
 .grid-layout .page-content .section-four .questions-list .list-item {
   width: 100%;
   border-top: 1px solid hsl(229, 8%, 60%);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 0;
+  padding: 1rem;
   font-size: 0.8rem;
   color: hsl(229, 31%, 21%);
+  cursor: pointer;
 }
-.grid-layout .page-content .section-four .questions-list .list-item .ico-arrow {
-  width: 15px;
+.grid-layout .page-content .section-four .questions-list .list-item div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.grid-layout .page-content .section-four .questions-list .list-item div .ico-arrow {
+  width: 10px;
   height: 10px;
-  margin-right: 1rem;
+}
+.grid-layout .page-content .section-four .questions-list .list-item div:hover {
+  color: hsl(0, 94%, 66%);
+}
+.grid-layout .page-content .section-four .questions-list .list-item .answer {
+  color: hsl(229, 8%, 60%);
+  display: none;
+  margin-top: 2rem;
+}
+.grid-layout .page-content .section-four .questions-list .list-item.active div .svg {
+  transform: rotate(180deg);
+}
+.grid-layout .page-content .section-four .questions-list .list-item.active div .svg .ico-arrow {
+  stroke: hsl(0, 94%, 66%);
+}
+.grid-layout .page-content .section-four .questions-list .list-item.active .answer {
+  display: block;
 }
 .grid-layout .page-content .section-four .questions-list .last-list-item {
   border-bottom: 1px solid hsl(229, 8%, 60%);
@@ -347,20 +432,52 @@ input {
   margin: 2rem 0;
   text-align: center;
 }
-.grid-layout .page-content .section-five .input-container .input-email {
-  width: 250px;
-  padding: 10px;
+.grid-layout .page-content .section-five .contact-us-email {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
-.grid-layout .page-content .section-five .input-container .input-email::placeholder {
+.grid-layout .page-content .section-five .contact-us-email .input-container .input-email {
+  width: 300px;
+  padding: 10px;
+  display: block;
+}
+.grid-layout .page-content .section-five .contact-us-email .input-container .input-email::placeholder {
   color: hsl(229, 8%, 60%);
   font-size: 0.8rem;
 }
-.grid-layout .page-content .section-five .btn-contact-us {
+.grid-layout .page-content .section-five .contact-us-email .input-container .error-message {
+  font-size: 0.8rem;
+  color: hsl(0, 0%, 100%);
+  margin-left: 10px;
+  display: none;
+}
+.grid-layout .page-content .section-five .contact-us-email .input-container .img-error {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  display: none;
+}
+.grid-layout .page-content .section-five .contact-us-email .input-container.error {
+  background-color: hsl(0, 94%, 66%);
+  padding: 2px 2px 8px 2px;
+  border-radius: 5px;
+  position: relative;
+}
+.grid-layout .page-content .section-five .contact-us-email .input-container.error .error-message {
+  display: block;
+}
+.grid-layout .page-content .section-five .contact-us-email .input-container.error .img-error {
+  display: block;
+}
+.grid-layout .page-content .section-five .contact-us-email .btn-contact-us {
   background-color: hsl(0, 94%, 66%);
   margin-left: 2rem;
   border: 1px solid transparent;
 }
-.grid-layout .page-content .section-five .btn-contact-us:hover {
+.grid-layout .page-content .section-five .contact-us-email .btn-contact-us:hover {
   border: 1px solid hsl(0, 94%, 66%);
   color: hsl(0, 94%, 66%);
   background-color: hsl(0, 0%, 100%);
@@ -663,17 +780,19 @@ input {
   .grid-layout .page-content .section-five {
     padding: 3rem 10rem;
   }
-  .grid-layout .page-content .section-five .input-container {
+  .grid-layout .page-content .section-five .contact-us-email {
+    flex-direction: column;
     width: 80%;
   }
-  .grid-layout .page-content .section-five .input-container .input-email {
-    display: block;
+  .grid-layout .page-content .section-five .contact-us-email .input-container {
     width: 100%;
-    margin-bottom: 3rem;
   }
-  .grid-layout .page-content .section-five .input-container .btn-contact-us {
+  .grid-layout .page-content .section-five .contact-us-email .input-container .input-email {
     width: 100%;
-    margin: 0;
+  }
+  .grid-layout .page-content .section-five .contact-us-email .btn-contact-us {
+    width: 100%;
+    margin: 3rem 0 0 0;
   }
   .grid-layout .footer .footer-content {
     padding: 2rem 10rem;
@@ -695,6 +814,9 @@ input {
 @media screen and (max-width: 870px) {
   .title {
     width: 100% !important;
+  }
+  .grid-layout .dropdown-navigation.active {
+    padding: 1rem 5rem;
   }
   .grid-layout .mobile-navigation {
     padding: 0 5rem;
@@ -730,6 +852,16 @@ input {
 @media screen and (max-width: 510px) {
   .grid-layout .mobile-navigation {
     padding: 0 2rem;
+  }
+  .grid-layout .dropdown-navigation.active {
+    padding: 1rem 2rem;
+    align-items: center;
+  }
+  .grid-layout .dropdown-navigation.active .navigation-list {
+    width: 90%;
+  }
+  .grid-layout .dropdown-navigation.active .list-social-media {
+    width: 90%;
   }
   .grid-layout .page-content .section-one .img-container {
     padding: 0 2rem;
